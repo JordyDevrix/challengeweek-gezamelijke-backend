@@ -1,0 +1,52 @@
+<div class="container" style="margin-top: 1em; padding: 1em;">
+  @if (cartItems.length === 0){
+    <div class="alert alert-warning" role="alert">
+      <p>Uw winkelwagen is leeg, voeg producten toe om verder te gaan.</p> <a class="btn btn-primary" role="button" [routerLink]="['/']">Bekijk Producten</a>
+    </div>
+  } @else {
+    <div class="row">
+      <div class="col">
+        <h5>Totale prijs: €{{ cartTotalPrice }} en {{ cartSize }} producten</h5>
+      </div>
+      <div class="col justify-content-around">
+        <button class="btn btn-primary" (click)="navigateToCheckout()" style="float: right;">Afrekenen</button>
+        <button class="btn btn-danger" (click)="clearCart()" style="float: right; margin-right: 1em;">Leeg Winkelwagen</button>
+      </div>
+    </div>
+    @for (product of cartItems; track $index){
+      <div class="row" style="margin-bottom: 1vh; margin-top: 1vh;">
+        <div class="card ">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{product.imageUrl}}" class="img-fluid rounded-start" alt="..." style="margin-bottom: 1em; margin-top: 1em;">
+            </div>
+            <div class="col">
+              <div class="card-body" >
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text"><small class="text-body-secondary">Bekijk Product</small></p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card-body">
+                <h5 class="card-title">€{{ product.price }}</h5>
+                <p class="card-text">Aantal: {{ product.quantity }}</p>
+                <button class="btn btn-danger" (click)="lowerQuantity(product)">Verwijder</button>
+                <button class="btn btn-primary" (click)="addQuantity(product)">Toevoegen</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+    <div class="row">
+      <div class="col">
+        <h5>Totale prijs: €{{ cartTotalPrice }}</h5>
+      </div>
+      <div class="col justify-content-around">
+        <button class="btn btn-primary" (click)="navigateToCheckout()" style="float: right;">Afrekenen</button>
+        <button class="btn btn-danger" (click)="clearCart()" style="float: right; margin-right: 1em;">Leeg Winkelwagen</button>
+      </div>
+    </div>
+  }
+</div>

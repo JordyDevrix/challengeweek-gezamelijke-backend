@@ -1,0 +1,109 @@
+<section class="clean-block payment-form dark">
+  <div class="container" style="margin-top: 5em;">
+    @if (cartItems.length === 0){
+      <div class="alert alert-warning" role="alert">
+        <p>Uw winkelwagen is leeg, voeg producten toe om verder te gaan.</p> <a class="btn btn-primary" role="button" [routerLink]="['/']">Bekijk Producten</a>
+      </div>
+    } @else {
+      <div class="card">
+        <div class="card-header">
+          Afrekenen
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Producten</h5>
+          @for (product of cartItems; track $index) {
+            <div class="card">
+              <div class="row">
+                <div class="col-10">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">{{product.quantity}} x €{{ product.price }} - {{(product.quantity * product.price)}}</h6>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="card-body" style="display: flex; justify-content: space-evenly;">
+                    <button class="btn btn-primary" (click)="addQuantity(product)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+                    <button class="btn btn-primary" (click)="lowerQuantity(product)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus"><path d="M5 12h14"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+          <div class="row">
+            <div class="col-6">
+              <div class="card">
+                <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th scope="col">Totaal</th>
+                  <th scope="col">€{{ cartTotalPrice }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row">Subtotaal</th>
+                  <td>€{{ parseFloat(String(((cartTotalPrice / 121) * 100))).toFixed(2)  }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">BTW (21%)</th>
+                  <td>€{{ parseFloat(String(((cartTotalPrice / 121) * 21))).toFixed(2) }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Direct Afrekenen</h5>
+                  <p>U rekent de bestelling direct af. De producten worden meteen opgestuurd en u zit nergens meer aan vast.</p>
+                  @if (!checkoutButtonDisabled) {
+                  <button class="btn btn-primary" (click)="checkout('paid')">Afrekenen</button>
+                  } @else {
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+          <div  class="row" style="margin-top: 1em;">
+            <div class="col-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Later Afrekenen</h5>
+                  <p>U rekent later af. Uw producten worden verstuurd, maar u bent wel verplicht binnen 30 dagen het volledige bedrag af te rekenen.</p>
+                  @if (!checkoutButtonDisabled) {
+                    <button class="btn btn-primary" (click)="checkout('afterpay')">Afrekenen</button>
+                  } @else {
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Deelbetalingen</h5>
+                  <p>U rekent af in delen. De producten worden verstuurd, maar u bent wel verplicht elke 10 dagen een derde van het bedrag te betalen..</p>
+                  @if (!checkoutButtonDisabled) {
+                    <button class="btn btn-primary" (click)="checkout('instalment1')">Afrekenen</button>
+                  } @else {
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

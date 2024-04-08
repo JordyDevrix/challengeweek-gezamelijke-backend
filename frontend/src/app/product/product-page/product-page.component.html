@@ -1,0 +1,59 @@
+<section class="clean-block clean-product dark" style="margin-top: 5em;">
+  <div class="container">
+    <div class="block-content">
+      <div class="product-info">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="gallery">
+              <div id="product-preview" class="vanilla-zoom">
+                <div class="zoomed-image"></div>
+                <div class="sidebar">
+                  @if (product.imageUrl) {
+                    <img class="img-fluid d-block small-preview" src="{{ product.imageUrl }}" />
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="info">
+              <h3>{{ product.name }}</h3>
+              <div class="price">
+                <h3>€ {{ product.price }}</h3>
+              </div><button class="btn btn-primary" type="button" (click)="addToCart(product)"><i class="icon-basket"></i>In Winkelwagen</button>
+              <div class="summary">
+                <p> {{ product.description }} </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-info" style="margin-top: 2em;">
+        <div>
+          <ul id="myTab" class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation"><a id="instructions-tab" class="nav-link active" role="tab" data-bs-toggle="tab" href="#instructions">Instructies</a></li>
+            <li class="nav-item" role="presentation"><a id="terms-tabs" class="nav-link" role="tab" data-bs-toggle="tab" href="#terms">Voorwaarden</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content" style="padding-top: 2em; padding-bottom: 2em;">
+            <div id="instructions" class="tab-pane fade show active description" role="tabpanel">
+              <p>{{ product.instruction }}</p>
+            </div>
+            <div id="terms" class="tab-pane fade specifications" role="tabpanel">
+              <p>{{ product.terms }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clean-related-items">
+        <h3>Andere producten</h3>
+        <div class="items">
+          <div class="row justify-content-around">
+            @for  (randomProduct of randomProducts; track $index) {
+              <app-product-detail [product_detail]="randomProduct" (productAddedToCart)="addToCart(randomProduct)" class="col-12 col-md-4 col-lg-3" style="margin: 1em;"></app-product-detail>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

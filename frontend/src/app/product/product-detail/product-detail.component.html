@@ -1,0 +1,11 @@
+
+
+
+<div class="card" style="width: 18rem;">
+  <img src="{{product_detail.imageUrl}}" class="card-img-top" [routerLink]="['/product', product_detail.id]">
+  <div class="card-body">
+    <h5 class="card-title">{{product_detail.name}}</h5>
+    <p class="card-text">{{product_detail.description}}</p>
+    <a (click)="addToCart(product_detail)" class="btn btn-primary">In Winkelmand</a>
+  </div>
+</div>

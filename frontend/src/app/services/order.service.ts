@@ -12,15 +12,15 @@ export class OrderService {
   constructor(private http: HttpClient) {  }
 
   public getOrders(): Observable<GetOrder[]> {
-    return this.http.get<GetOrder[]>('http://s1149771.student.inf-hsleiden.nl:29771/api/private/orders/all');
+    return this.http.get<GetOrder[]>('http://localhost:8080/api/private/orders/all');
   }
 
   public getOrderById(id: string): Observable<GetOrder> {
-    return this.http.get<GetOrder>('http://s1149771.student.inf-hsleiden.nl:29771/api/private/orders/' + id);
+    return this.http.get<GetOrder>('http://localhost:8080/api/private/orders/' + id);
   }
 
   public createOrder(order: CreateOrder): Observable<CreateOrder> {
-    return this.http.post<CreateOrder>('http://s1149771.student.inf-hsleiden.nl:29771/api/private/orders/create', order);
+    return this.http.post<CreateOrder>('http://localhost:8080/api/private/orders/create', order);
   }
 
   // pay existing order

@@ -11,11 +11,11 @@ export class ProductsService {
   constructor(private http:HttpClient) { }
 
   public getProducts(): Observable<Product[]> {
-      return this.http.get<Product[]>('http://s1149771.student.inf-hsleiden.nl:29771/api/pub/products/all');
+      return this.http.get<Product[]>('http://localhost:8080/api/pub/products/all');
   }
 
   public getProductById(id: string): Observable<Product> {
-    return this.http.get<Product>('http://s1149771.student.inf-hsleiden.nl:29771/api/pub/products/' + id);
+    return this.http.get<Product>('http://localhost:8080/api/pub/products/' + id);
   }
 
 }

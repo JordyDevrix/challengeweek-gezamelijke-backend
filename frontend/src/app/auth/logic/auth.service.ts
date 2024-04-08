@@ -8,7 +8,7 @@ import { TokenService } from './token.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private _apiUrl: string = 'http://s1149771.student.inf-hsleiden.nl:29771/api/auth';
+  private _apiUrl: string = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 

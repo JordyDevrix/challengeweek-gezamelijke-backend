@@ -7,8 +7,7 @@ import java.util.Set;
 @Entity
 public class Category {
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     private String name;
     /*
@@ -46,11 +45,11 @@ public class Category {
         this.name = name;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 }

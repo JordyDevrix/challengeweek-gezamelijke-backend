@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.inffs</groupId>
-	<artifactId>ricks-webshop-api</artifactId>
+	<artifactId>molotov-api</artifactId>
 	<version>1.0.0</version>
-	<name>ricks-webshop-api</name>
-	<description>ricks-webshop-api</description>
+	<name>molotov-api</name>
+	<description>molotov-api</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>

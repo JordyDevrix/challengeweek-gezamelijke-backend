@@ -4,6 +4,7 @@ import com.example.webshop.models.Product;
 import com.example.webshop.models.Webshop;
 import com.example.webshop.dto.WebshopDTO;
 import com.example.webshop.dao.WebshopDAO;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +35,7 @@ public class ProductDAO {
         List<WebshopDTO> webshopList = this.webshopDAO.getAllWebshops();
         List<Product> productList = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         for (WebshopDTO webshop : webshopList) {
             String url = (webshop.getUrl() + "/pub/products/all");
@@ -74,6 +76,7 @@ public class ProductDAO {
         WebshopDTO webshop = this.webshopDAO.getWebshopByPrefix(prefix);
         String url = webshop.getUrl() + "/pub/products/" + productId;
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

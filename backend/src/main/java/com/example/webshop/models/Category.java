@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.Set;
 
-@Entity
+
 public class Category {
-    @Id
     private String id;
 
     private String name;
@@ -14,8 +13,7 @@ public class Category {
     maps the one-to-many relationship between category and products, jsonmanaged so that we do not get an
     infinite dependency loop in the request.
      */
-    @OneToMany(mappedBy = "category")
-    @JsonManagedReference
+
     private Set<Product> products;
 
     //needed by JPA to create the entity must be present no arg constructor

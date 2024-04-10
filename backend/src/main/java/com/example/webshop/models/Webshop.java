@@ -3,7 +3,7 @@ package com.example.webshop.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "webshops")
 public class Webshop {
     @Id
     @GeneratedValue
@@ -48,5 +48,14 @@ public class Webshop {
 
     public void setPrefix(String prefix) {
         this.prefix = prefix;
+    }
+
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", prefix='" + prefix + '\'' +
+                '}';
     }
 }

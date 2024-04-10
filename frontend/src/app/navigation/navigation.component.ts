@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {TokenService} from "../auth/logic/token.service";
 import {CartService} from "../services/cart.service";
@@ -32,6 +32,7 @@ export class NavigationComponent {
 
     logout() {
       this.tokenService.removeToken();
+      
     }
 
 }

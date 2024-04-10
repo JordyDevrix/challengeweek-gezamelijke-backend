@@ -8,7 +8,7 @@ import {catchError, forkJoin, map, Observable, of} from "rxjs";
 })
 export class ProductsService {
 
-  private baseUrl: string = 'http://localhost:8081/api/pub/products/';
+  private baseUrl: string = 'http://s1149771.student.inf-hsleiden.nl:29771/api/pub/products/all';
 
   constructor(private http:HttpClient) { }
 

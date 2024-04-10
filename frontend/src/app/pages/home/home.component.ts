@@ -10,7 +10,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
   imports: [
     ProductIndexComponent,
     ProductHeaderComponent,
-    RouterLink, 
+    RouterLink,
     SearchBarComponent
   ],
   templateUrl: './home.component.html',

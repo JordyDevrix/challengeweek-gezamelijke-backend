@@ -1,13 +1,16 @@
 package com.example.webshop.dao;
 
 
+import com.example.webshop.dto.CategoryDTO;
 import com.example.webshop.dto.WebshopDTO;
 import com.example.webshop.models.Category;
 import com.example.webshop.models.Product;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.coyote.Request;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.net.URI;
@@ -90,7 +93,6 @@ public class CategoryDAO {
 
             // Parse the JSON response body into a Product object
             Category categoryFromWebshop = mapper.readValue(responseBody, new TypeReference<Category>(){});
-            System.out.println(categoryFromWebshop);
 
             // give product id the webshop prefix
             categoryFromWebshop.setId(webshop.getPrefix() + "-" + categoryFromWebshop.getId());
@@ -109,5 +111,26 @@ public class CategoryDAO {
         }
     }
 
+    public String createCategory(CategoryDTO categoryDTO, long webshopId) {
+        WebshopDTO webshop = this.webshopDAO.getWebshopById(webshopId);
+        String url = webshop.getUrl() + "/admin/categories/create";
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url)).
+                POST(HttpRequest.BodyPublishers.ofString("{\"name\":\"" + categoryDTO.name + "\"}"))
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return "new category created";
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            return "category creation failed";
+        }
+
+    }
 }

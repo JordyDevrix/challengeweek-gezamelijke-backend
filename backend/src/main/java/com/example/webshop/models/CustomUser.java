@@ -61,16 +61,6 @@ public class CustomUser {
     public CustomUser() {
     }
 
-    public String getRoles()
-    {
-        return this.role;
-    }
-
-    public void setRoles(String role)
-    {
-        this.role = role;
-    }
-
     public String getName() {
         return name;
     }

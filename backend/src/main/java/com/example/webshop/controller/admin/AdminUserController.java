@@ -3,6 +3,8 @@ package com.example.webshop.controller.admin;
 
 import com.example.webshop.dao.UserDAO;
 import com.example.webshop.models.CustomUser;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -23,41 +25,37 @@ public class AdminUserController {
         this.userDAO = userDAO;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<CustomUser>> getUsers(){
         return ResponseEntity.ok(this.userDAO.getUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomUser> getUserById(@PathVariable long id, Principal principal){
-        // check if user is requesting his own data or is admin
-        if (Long.parseLong(principal.getName()) == id || principal.getName().equals("admin")) {
+    public ResponseEntity<CustomUser> getUserById(@PathVariable long id){
+        if (this.userDAO.getUserById(id) != null) {
             return ResponseEntity.ok(this.userDAO.getUserById(id));
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
-    public ResponseEntity<String> createUser(@RequestBody CustomUser user) {
-        return ResponseEntity.ok("created user");
+    public ResponseEntity<CustomUser> createUser(@RequestBody CustomUser user) {
+        return ResponseEntity.ok(this.userDAO.createUser(user));
     }
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<CustomUser> updateUser(@PathVariable long id, @RequestBody CustomUser user, Principal principal) {
-        // check if user is requesting his own data or is admin
-        if (Long.parseLong(principal.getName()) == id || principal.getName().equals("admin")) {
-            return ResponseEntity.ok(this.userDAO.updateUser(id, user));
-        }
-        return ResponseEntity.badRequest().build();
+    public ResponseEntity<CustomUser> updateUser(@PathVariable long id, @RequestBody CustomUser user) {
+        return ResponseEntity.ok(this.userDAO.updateUser(id, user));
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable long id) {
-        return ResponseEntity.ok("deleted user");
+    public ResponseEntity<Void> deleteUser(@PathVariable long id) {
+        if (this.userDAO.deleteUser(id)) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
 }

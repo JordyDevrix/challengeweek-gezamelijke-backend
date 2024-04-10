@@ -17,9 +17,9 @@ public class AdminStatisticsDAO {
     }
 
     public double getTotalSalesPrice() {
-        double salesAmount = 0;
         List<Order> allOrders = orderRepository.findAll();
         if (!allOrders.isEmpty()) {
+            double salesAmount = 0;
             for (Order order : allOrders) {
                 salesAmount += order.getTotalPrice();
             }
@@ -37,6 +37,22 @@ public class AdminStatisticsDAO {
             return allOrders.size();
         }
         else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "No sales made so far"
+            );
+        }
+    }
+
+    public double getTotalSalesPriceYear(String year) {
+        // Moet nog aangepast worden, kan pas na Orders fix
+        List<Order> allOrders = orderRepository.findAll();
+        if (!allOrders.isEmpty()) {
+            double salesAmount = 0;
+            for (Order order : allOrders) {
+                salesAmount += order.getTotalPrice();
+            }
+            return salesAmount;
+        } else {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sales made so far"
             );

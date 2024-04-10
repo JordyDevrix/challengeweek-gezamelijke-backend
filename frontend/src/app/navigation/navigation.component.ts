@@ -34,4 +34,12 @@ export class NavigationComponent {
       this.tokenService.removeToken();
     }
 
+    public onMouseEnter(event: MouseEvent) {
+      (event.target as HTMLElement).style.color = 'red';
+    }
+
+    public onMouseLeave(event: MouseEvent) {
+      (event.target as HTMLElement).style.color = '';
+    }
+
 }

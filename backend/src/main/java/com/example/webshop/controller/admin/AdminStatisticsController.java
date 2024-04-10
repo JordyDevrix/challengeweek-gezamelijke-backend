@@ -32,4 +32,9 @@ public class AdminStatisticsController {
         return ResponseEntity.ok(this.adminStatisticsDAO.getTotalSalesPriceYear(year));
     }
 
+    @GetMapping("/salescustomers")
+    public ResponseEntity<Integer> getTotalSalesCustomers() {
+        return ResponseEntity.ok(this.adminStatisticsDAO.getTotalSalesCustomers());
+    }
+
 }

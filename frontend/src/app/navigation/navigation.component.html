@@ -24,12 +24,14 @@
   </div>
 </nav>
 
-<nav class="navbar navbar-light navbar-expand-lg clean-navbar" style="background: #000000;">
+<nav class="navbar navbar-light navbar-expand-lg clean-navbar" style="background: #000000;" *ngIf="showCategoryBar">
   <ul class="navbar-nav-center">
+    
     <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/MEUBOONS-2']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Meubels</a></li>
     <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Giftcards</a></li>
     <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Muziekinstrumenten & Speakers</a></li>
     <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Sneakers</a></li>
     <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Computers</a></li>
+    
   </ul>
 </nav>

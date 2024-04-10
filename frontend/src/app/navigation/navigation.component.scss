@@ -195,3 +195,14 @@ li {
   align-items: center;
   justify-content: space-between;
 }
+
+@media (min-width: 64em){
+.usp-banner {
+    display: block;
+    padding: .25rem 0;
+    font-size: .75rem;
+    line-height: 1.5rem;
+    color: #0000a4;
+    background: #fff;
+}
+}

@@ -15,8 +15,49 @@
       @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {<div class="alert alert-warning mt-2">
         Het wachtwoord moet minimaal 8 karakters lang zijn, ten minste 1 hoofdletter, 1 kleine letter, 1 cijfer en 1 speciaal teken bevatten.
       </div>}
+      <label for="confirmPassword" style="color: black;">Bevestig wachtwoord</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" required>
+      @if (registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) {<div class="alert alert-warning mt-2">
+        De wachtwoorden komen niet overeen.
+    </div> }
     </div>
-    <div  class="container">
+
+<!--    name and phone side by side -->
+    <div class="form-row row" style="padding-top: 5vh">
+      <div class="form-group col-md-6">
+        <label for="name" style="color: black;">Naam</label>
+        <input type="text" id="name"  class="form-control" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="phone" style="color: black;">Telefoonnummer</label>
+        <input type="text" id="phone"  class="form-control" required>
+      </div>
+    </div>
+    <div class="form-row row" >
+      <div class="form-group col-md-6">
+        <label for="address" style="color: black;">Adres</label>
+        <input type="text" id="address"  class="form-control" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="zip" style="color: black;">Postcode</label>
+        <input type="text" id="zip"  class="form-control" required>
+      </div>
+    </div>
+    <div class="form-row row" >
+      <div class="form-group col-md-6">
+        <label for="city" style="color: black;">Stad</label>
+        <input type="text" id="city"  class="form-control" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="country" style="color: black;">Land</label>
+        <input type="text" id="country"  class="form-control" required>
+      </div>
+    </div>
+
+
+
+
+    <div  class="container" style="padding-top: 1vh">
       <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registreren</button>
       <a (click)="navigateToLogin()" class="btn btn-link">Inloggen</a>
     </div>

@@ -34,14 +34,14 @@ public class Seeder {
         Webshop webshop1 = new Webshop("Meuboons", "http://s1121717.student.inf-hsleiden.nl:21717/api", "MEUBOONS");
         Webshop webshop2 = new Webshop("CardCenter", "http://s1149771.student.inf-hsleiden.nl:29771/api", "CARDCENTER");
         Webshop webshop3 = new Webshop("Plenty", "http://s1148280.student.inf-hsleiden.nl:28280/api", "PLENTY");
-//        Webshop webshop4 = new Webshop("SoundsLike", "http://s1151166.student.inf-hsleiden.nl:21166/api", "SOUNDSLIKE");
-//        Webshop webshop5 = new Webshop("Shoes For All", "http://s1150300.student.inf-hsleiden.nl:20300/api", "SHOESFORALL");
+        Webshop webshop4 = new Webshop("SoundsLike", "http://s1151166.student.inf-hsleiden.nl:21166/api", "SOUNDSLIKE");
+        Webshop webshop5 = new Webshop("Shoes For All", "http://s1150300.student.inf-hsleiden.nl:20300/api", "SHOESFORALL");
 
         this.webshopDAO.createWebshop(new WebshopDTO(webshop1.getName(), webshop1.getUrl(), webshop1.getPrefix()));
         this.webshopDAO.createWebshop(new WebshopDTO(webshop2.getName(), webshop2.getUrl(), webshop2.getPrefix()));
         this.webshopDAO.createWebshop(new WebshopDTO(webshop3.getName(), webshop3.getUrl(), webshop3.getPrefix()));
-//        this.webshopDAO.createWebshop(new WebshopDTO(webshop4.getName(), webshop4.getUrl(), webshop4.getPrefix()));
-//        this.webshopDAO.createWebshop(new WebshopDTO(webshop5.getName(), webshop5.getUrl(), webshop5.getPrefix()));
+        this.webshopDAO.createWebshop(new WebshopDTO(webshop4.getName(), webshop4.getUrl(), webshop4.getPrefix()));
+        this.webshopDAO.createWebshop(new WebshopDTO(webshop5.getName(), webshop5.getUrl(), webshop5.getPrefix()));
 
 
 

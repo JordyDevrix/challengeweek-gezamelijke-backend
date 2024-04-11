@@ -27,13 +27,13 @@ export class SearchBarComponent {
   ];
 
   newEvent(event: any) {
-    console.log(event.target.value)
+    // console.log(event.target.value)
     this.myString = event.target.value;
   }
 
   stringSimilarity = stringSimilarity
   public search() {
-    console.log("Query: " + this.myString)
+    // console.log("Query: " + this.myString)
     let productsFound = [];
     console.log("Results by direct match:");
     for (let i = 0; i < this.productList.length; i++) {

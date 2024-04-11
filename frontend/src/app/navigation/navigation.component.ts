@@ -4,12 +4,13 @@ import {TokenService} from "../auth/logic/token.service";
 import {CartService} from "../services/cart.service";
 import {Router, NavigationEnd} from '@angular/router'
 import { NgIf } from '@angular/common';
+import {BackToTopComponent} from "../back-to-top/back-to-top.component";
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
   imports: [
-    RouterLink, NgIf
+    RouterLink, NgIf, BackToTopComponent
   ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss'
@@ -45,14 +46,14 @@ export class NavigationComponent implements OnInit{
 
     public onMouseEnter(event: MouseEvent) {
       (event.target as HTMLElement).style.color = 'red';
-      (event.target as HTMLElement).style.boxShadow = '0 0 5px rgba(0, 0, 0, 0.5)'; 
+      (event.target as HTMLElement).style.boxShadow = '0 0 5px rgba(0, 0, 0, 0.5)';
     }
 
     public onMouseLeave(event: MouseEvent) {
       (event.target as HTMLElement).style.color = '';
-      (event.target as HTMLElement).style.boxShadow = ''; 
+      (event.target as HTMLElement).style.boxShadow = '';
     }
 
-    
+
 
 }

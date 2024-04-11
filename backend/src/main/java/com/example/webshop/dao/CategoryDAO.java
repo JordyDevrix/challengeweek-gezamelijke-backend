@@ -114,14 +114,17 @@ public class CategoryDAO {
     public String createCategory(CategoryDTO categoryDTO, long webshopId) {
         WebshopDTO webshop = this.webshopDAO.getWebshopById(webshopId);
         String url = webshop.getUrl() + "/admin/categories/create";
+        System.out.println(url);
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url)).
-                POST(HttpRequest.BodyPublishers.ofString("{\"name\":\"" + categoryDTO.name + "\"}"))
+                .uri(URI.create(url))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString("{\"name\":\"" + categoryDTO.name + "\"}"))
                 .build();
+
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -131,6 +134,62 @@ public class CategoryDAO {
             e.printStackTrace();
             return "category creation failed";
         }
+    }
 
+    public String updateCategory(String id, CategoryDTO categoryDTO) {
+        // get prefix from id
+        String prefix = id.split("-")[0];
+        // get id from id
+        String categoryId = id.split("-")[1];
+
+        WebshopDTO webshop = this.webshopDAO.getWebshopByPrefix(prefix);
+        String url = webshop.getUrl() + "/admin/categories/update/" + categoryId;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString("{\"name\":\"" + categoryDTO.name + "\"}"))
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return "category updated";
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String deleteCategory(String id){
+        // get prefix from id
+        String prefix = id.split("-")[0];
+        // get id from id
+        String categoryId = id.split("-")[1];
+
+        WebshopDTO webshop = this.webshopDAO.getWebshopByPrefix(prefix);
+        String url = webshop.getUrl() + "/admin/categories/delete/" + categoryId;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .build();
+        System.out.println(url);
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return "category deleted";
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

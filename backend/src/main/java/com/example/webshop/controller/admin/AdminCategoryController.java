@@ -24,15 +24,15 @@ public class AdminCategoryController {
         return ResponseEntity.ok(this.categoryDAO.createCategory(categoryDTO, webshopId));
     }
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<String> updateCategory(@PathVariable long id, @RequestBody CategoryDTO categoryDTO) {
-//        this.categoryDAO.updateCategory(id, categoryDTO);
-//        return ResponseEntity.ok("Category updated");
-//    }
-//
-//    @PostMapping("/delete/{id}")
-//    public ResponseEntity<String> deleteCategory(@PathVariable long id) {
-//        this.categoryDAO.deleteCategory(id);
-//        return ResponseEntity.ok("Category deleted");
-//    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateCategory(@PathVariable String id, @RequestBody CategoryDTO categoryDTO) {
+        this.categoryDAO.updateCategory(id, categoryDTO);
+        return ResponseEntity.ok("Category updated");
+    }
+
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable String id) {
+        this.categoryDAO.deleteCategory(id);
+        return ResponseEntity.ok("Category deleted");
+    }
 }

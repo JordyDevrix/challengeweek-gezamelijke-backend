@@ -25,7 +25,13 @@ export class RegisterComponent implements OnInit {
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')])
+      confirmPassword: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]),
+      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
+      phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
+      address: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]*$')]),
+      city: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
+      country: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
+      zip: new FormControl('', [Validators.required, Validators.pattern('^^\\d{4}[a-zA-Z]{2}$')])
     });
   }
 

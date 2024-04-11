@@ -40,9 +40,8 @@ export class NavigationComponent implements OnInit{
       return this.tokenService.hasToken();
     }
 
-    logout() {
-      this.tokenService.removeToken();
-      
+    isAdminUrl() {
+      return window.location.href.indexOf('admin') > -1;
     }
 
     public onMouseEnter(event: MouseEvent) {
@@ -55,6 +54,9 @@ export class NavigationComponent implements OnInit{
       (event.target as HTMLElement).style.boxShadow = '';
     }
 
+    logout() {
+      this.tokenService.removeToken();
 
+    }
 
 }

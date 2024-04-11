@@ -8,8 +8,12 @@ import {AuthGuard} from "./auth/logic/auth.guard";
 import {CheckoutComponent} from "./checkout/checkout.component";
 import {AllOrdersComponent} from "./pages/all-orders/all-orders.component";
 import {OrderComponent} from "./pages/order/order.component";
+
 import {AdminDashComponent} from "./admin/admindash/admindash.component";
 import {AdminProductsComponent} from "./admin/adminproducts/adminproducts.component";
+
+import { ProfileComponent } from './profile/profile.component';
+
 
 /**
  * The routes for the application.
@@ -56,14 +60,14 @@ export const routes: Routes = [
    */
   { path: 'order/:id', component: OrderComponent, canActivate: [AuthGuard]},
 
+
   { path: 'admin', component: AdminDashComponent},
   { path: 'admin/products', component: AdminProductsComponent },
   // { path: 'admin', component: AdminDashComponent, canActivate: [AuthGuard] },
   // { path: 'admin', component: AdminDashComponent, canActivate: [AuthGuard] },
   // { path: 'admin', component: AdminDashComponent, canActivate: [AuthGuard] },
   // { path: 'admin', component: AdminDashComponent, canActivate: [AuthGuard] },
-
-
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
 
 
   /**

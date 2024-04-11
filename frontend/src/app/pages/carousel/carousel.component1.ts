@@ -15,5 +15,4 @@ import {ProductHeaderComponent} from "../../product/product-header/product-heade
 
 export class CarouselComponent1 {
 
-
 }

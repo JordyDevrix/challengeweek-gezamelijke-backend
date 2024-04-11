@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <h3 class="text-dark mb-4">Producten</h3>
+  <div class="card shadow">
+    <div class="card-header py-3">
+      <p class="text-primary m-0 fw-bold">Producten</p>
+    </div>
+    <div class="card-body">
+<!--      <div class="row">-->
+<!--        <div class="col-md-6 text-nowrap">-->
+<!--          <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Toon <select class="d-inline-block form-select form-select-sm">-->
+<!--            <option value="10" selected>10</option>-->
+<!--            <option value="25">25</option>-->
+<!--            <option value="50">50</option>-->
+<!--            <option value="100">100</option>-->
+<!--          </select></label></div>-->
+<!--        </div>-->
+<!--        <div class="col-md-6">-->
+<!--          <div id="dataTable_filter" class="text-md-end dataTables_filter"><label class="form-label"><input class="form-control form-control-sm" type="search" aria-controls="dataTable" placeholder="Search" /></label></div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div id="dataTableDiv" class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">-->
+<!--        <table id="dataTable" class="table my-0">-->
+<!--          <thead>-->
+<!--          <tr>-->
+<!--            <th>Productnaam</th>-->
+<!--            <th>Omschrijving</th>-->
+<!--            <th>Webshop</th>-->
+<!--            <th>Prijs</th>-->
+<!--            <th>Stock</th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--            @for ($i = 0; $i < 10; $i++) {-->
+<!--              <tr>-->
+<!--                <td>{{ $i.title }}</td>-->
+<!--                <td>Omschrijving</td>-->
+<!--                <td>Webshop</td>-->
+<!--                <td>Prijs</td>-->
+<!--                <td>Stock</td>-->
+<!--              </tr>-->
+<!--            }-->
+<!--          </tbody>-->
+<!--          <tfoot>-->
+<!--          <tr>-->
+<!--            <td><strong>Productnaam</strong></td>-->
+<!--            <td><strong>Omschrijving</strong></td>-->
+<!--            <td><strong>Webshop</strong></td>-->
+<!--            <td><strong>Prijs</strong></td>-->
+<!--            <td><strong>Stocck</strong></td>-->
+<!--          </tr>-->
+<!--          </tfoot>-->
+<!--        </table>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <div class="col-md-6 align-self-center">-->
+<!--          <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Toont 1 tot 10 van de 27</p>-->
+<!--        </div>-->
+<!--        <div class="col-md-6">-->
+<!--          <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">-->
+<!--            <ul class="pagination">-->
+<!--              <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>-->
+<!--              <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+<!--              <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--              <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--              <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>-->
+<!--            </ul>-->
+<!--          </nav>-->
+<!--        </div>-->
+<!--      </div>-->
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" sortable="name" (sort)="onSort($event)">Productnaam</th>
+          <th scope="col" >Productomschrijving</th>
+          <th scope="col" sortable="webshop" (sort)="onSort($event)">Webshop</th>
+          <th scope="col" sortable="price" (sort)="onSort($event)">Prijs</th>
+          <th scope="col" sortable="stock" (sort)="onSort($event)">Stock</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (product of products; track product.name) {
+            <tr>
+              <th scope="row">{{ product.name }}</th>
+              <td>{{ product.description }}</td>
+              <td>{{ product.webshop }}</td>
+
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

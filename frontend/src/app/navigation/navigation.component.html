@@ -1,37 +1,61 @@
-<nav class="navbar navbar-expand-lg  clean-navbar navbar-light" style="background: #c8311c" >
+<header>
+<nav class="navbar navbar-expand-lg  clean-navbar navbar-light" style="background: #b41c0b" >
   <div class="container">
     <a class="navbar-brand logo" href="#"><h1 style="color: white"><img src="https://media.istockphoto.com/id/831242722/vector/burning-molotov-cocktail.jpg?s=612x612&w=0&k=20&c=k8bKlGJUyGMc1J_PbrpTCFnZZ4ks0qACI1GBwsYWAEk="  style="height: 15%; width: 11%; justify-self: left;">Bom.com</h1></a>
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
       <span class="visually-hidden">Toggle navigation</span>
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="navcol-1" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" [routerLink]="['/']">Home</a></li>
-        <li class="nav-item"><a class="nav-link position-relative" [routerLink]="['/', 'cart']">Winkelwagen
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{cartSize}}</span></a></li>
 
-        @if (isLoggedIn()) {
-          <li class="nav-item"><a class="nav-link" [routerLink]="['/', 'orders']">Bestellingen</a></li>
+    <div id="navcol-1" class="collapse navbar-collapse">
+      @if (isAdminUrl() == false) {
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" [routerLink]="['/']">Home</a></li>
+          <li class="nav-item"><a class="nav-link position-relative" [routerLink]="['/', 'cart']">Winkelwagen
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{cartSize}}</span></a></li>
+
+          @if (isLoggedIn()) {
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/', 'orders']">Bestellingen</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/', 'profile']">Profiel</a></li>
+            <li class="nav-item"><a class="nav-link" (click)="logout()" [routerLink]="['/']">Uitloggen</a></li>
+          }
+          @else {
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/', 'login']">Inloggen</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/', 'register']">Registeren</a></li>
+          }
+        </ul>
+      } @else if (isAdminUrl() == true) {
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" [routerLink]="['/admin']">Admin</a></li>
           <li class="nav-item"><a class="nav-link" (click)="logout()" [routerLink]="['/']">Uitloggen</a></li>
-            }
-        @else {
+        </ul>
+      }
+      @else {
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" [routerLink]="['/', 'login']">Inloggen</a></li>
           <li class="nav-item"><a class="nav-link" [routerLink]="['/', 'register']">Registeren</a></li>
-            }
-      </ul>
+        </ul>
+
+      }
+
     </div>
+
   </div>
+
 </nav>
+
 
 <nav class="navbar navbar-light navbar-expand-lg clean-navbar" style="background: #000000;" *ngIf="showCategoryBar">
   <ul class="navbar-nav-center">
-    
-    <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/MEUBOONS-2']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Meubels</a></li>
-    <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Giftcards</a></li>
-    <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Muziekinstrumenten & Speakers</a></li>
-    <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Sneakers</a></li>
-    <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Computers</a></li>
-    
+
+    <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/MEUBOONS']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Meubels</a></li>
+    <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/CARDCENTER']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Giftcards</a></li>
+    <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/SOUNDSLIKE']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Muziekinstrumenten & Speakers</a></li>
+    <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/SHOESFORALL']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Sneakers</a></li>
+    <li class="nav-item" style="color: #ffffff;"><a class="nav-link" [routerLink]="['/','pub/categories/PLENTY']" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">Computers</a></li>
+
   </ul>
 </nav>
+
+<app-back-to-top></app-back-to-top>
+</header>

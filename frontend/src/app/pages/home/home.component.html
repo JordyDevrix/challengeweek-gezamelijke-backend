@@ -6,12 +6,21 @@
     </div>
   </div>
 }
-
-<app-product-header></app-product-header>
 <br/>
 <app-search-bar></app-search-bar>
-<div class="container">
-  <app-carousel></app-carousel>
-</div>
-<app-product-index></app-product-index>
+<br/>
 
+<app-carousel ></app-carousel>
+
+<!-- [slides]="slides" -->
+<app-product-index ></app-product-index>
+<br/><br/>
+<script>
+  function showProducts() {
+    setTimeout(function() {
+      loadingProducts = false;
+    }, 2000);
+  }
+
+  showProducts();
+</script>

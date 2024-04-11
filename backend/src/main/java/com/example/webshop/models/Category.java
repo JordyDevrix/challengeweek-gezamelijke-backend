@@ -4,19 +4,16 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.Set;
 
-@Entity
+
 public class Category {
-    @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     private String name;
     /*
     maps the one-to-many relationship between category and products, jsonmanaged so that we do not get an
     infinite dependency loop in the request.
      */
-    @OneToMany(mappedBy = "category")
-    @JsonManagedReference
+
     private Set<Product> products;
 
     //needed by JPA to create the entity must be present no arg constructor
@@ -46,11 +43,11 @@ public class Category {
         this.name = name;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 }

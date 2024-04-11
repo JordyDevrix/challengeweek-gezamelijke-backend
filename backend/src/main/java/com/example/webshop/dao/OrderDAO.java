@@ -1,14 +1,14 @@
 package com.example.webshop.dao;
 
-import com.example.webshop.models.CustomUser;
-import com.example.webshop.models.Order;
-import com.example.webshop.models.Product;
+import com.example.webshop.models.*;
 import com.example.webshop.services.OrderService;
 import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
+import com.example.webshop.dao.OrderProductsRepository;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +18,15 @@ public class OrderDAO {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final OrderService orderService;
+    private WebshopRepository webshopRepository;
+    private OrderProductsRepository orderProductsRepository;
 
-    public OrderDAO(OrderRepository orderRepository, UserRepository userRepository, OrderService orderService) {
+    public OrderDAO(OrderRepository orderRepository, UserRepository userRepository, OrderService orderService, WebshopRepository webshopRepository, OrderProductsRepository orderProductsRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
         this.orderService = orderService;
+        this.webshopRepository = webshopRepository;
+        this.orderProductsRepository = orderProductsRepository;
     }
 
     public List<Order> getAllOrders() {
@@ -42,8 +46,17 @@ public class OrderDAO {
             String orderDate = date.toString();
             Double totalPrice = calculateTotalPrice(products);
 
-            Order order = new Order(user, products, orderDate, status, totalPrice);
+            List<OrderProduct> orderProducts = productsToOrderProducts(products);
+
+            Order order = new Order(user, orderDate, status, totalPrice);
             this.orderRepository.save(order);
+            long orderId = order.getId();
+
+            for (OrderProduct orderProduct : orderProducts) {
+                orderProduct.setOrder_id(order);
+                this.orderProductsRepository.save(orderProduct);
+            }
+
             return;
         }
         throw new ResponseStatusException(
@@ -77,6 +90,25 @@ public class OrderDAO {
             total += price;
         }
         return total;
+    }
+
+    public List<OrderProduct> productsToOrderProducts(List<Product> products) {
+        List<OrderProduct> orderProducts = new ArrayList<>();
+        for (Product product : products) {
+            // get prefix from id
+            String prefix = product.getId().split("-")[0];
+            prefix = prefix.toUpperCase();
+            String productId = product.getId().split("-")[1];
+
+            // get webshop by prefix
+            Webshop webshop = this.webshopRepository.findByPrefix(prefix);
+
+            // create orderProduct
+            OrderProduct orderProduct = new OrderProduct(webshop, productId, product.getId(), product.getPrice());
+            orderProducts.add(orderProduct);
+
+        }
+        return orderProducts;
     }
 
     public List<Order> getAllOrdersByUser(long id) {

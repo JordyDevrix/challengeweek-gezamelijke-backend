@@ -13,6 +13,12 @@ public class CustomUser {
     private String email;
     private String password;
     private String role;
+    private String name;
+    private String phone;
+    private String address;
+    private String zip;
+    private String city;
+    private String country;
 
     public Long getId() {
         return id;
@@ -55,7 +61,51 @@ public class CustomUser {
     public CustomUser() {
     }
 
-    public String getRoles() {
-        return role;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

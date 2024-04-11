@@ -4,6 +4,9 @@ import {ProductHeaderComponent} from "../../product/product-header/product-heade
 import {RouterLink} from "@angular/router";
 import {SearchBarComponent } from '../search-bar/search-bar.component';
 import { CarouselComponent1 } from '../carousel/carousel.component1';
+import { ProductsService } from '../../services/products.service';
+import { Product } from '../../models/product.model';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +16,8 @@ import { CarouselComponent1 } from '../carousel/carousel.component1';
     ProductHeaderComponent,
     RouterLink, 
     SearchBarComponent,
-    CarouselComponent1
+    CarouselComponent1, 
+    ProductIndexComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -22,17 +26,31 @@ export class HomeComponent {
 
   // get url parameters and if success=true, show success message
   public success: boolean = false;
+  public products: Product[] = new Array<Product>();
 
-  constructor() {
+  constructor(private productsService: ProductsService, private cartService: CartService) {
     const urlParams = new URLSearchParams(window.location.search);
     this.success = urlParams.get('success') === 'true';
   }
 
-  public slides = [
-    { src: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*mQb_Psavd1aGLlMXJJ2HvA.png" },
-    { src: "https://d2rfa446ja7yzb.cloudfront.net/eyJidWNrZXQiOiJtaXJyb3IuZ2V0Zmxvd2JveC5jb20uZXUtd2VzdC0xLmxpdmUiLCJrZXkiOiJhSFIwY0hNNkx5OTNkM2N1YVc1emRHRm5jbUZ0TG1OdmJTOXdMME0wUjJWS1h6VnZYMko2THc9PS8wIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjo2NDB9fX0=" },
-    { src: "https://d2rfa446ja7yzb.cloudfront.net/eyJidWNrZXQiOiJtaXJyb3IuZ2V0Zmxvd2JveC5jb20uZXUtd2VzdC0xLmxpdmUiLCJrZXkiOiJhSFIwY0hNNkx5OTNkM2N1YVc1emRHRm5jbUZ0TG1OdmJTOXdMME16VFRkRlQxZHZZMFYwTHc9PS8wIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjo2NDB9fX0=" },
-    { src: "https://image4.com" }
-];
+
+  ngOnInit(): void {
+    this.productsService
+      .getProducts()
+      .subscribe((products: Product[]) => {
+        this.products = products;
+      });
+  }
+
+  public onBuyProduct(product: Product) {
+    this.cartService.addProductToCart(product)
+  }
+
+  // public slides = [
+  //   { src: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*mQb_Psavd1aGLlMXJJ2HvA.png" },
+  //   { src: "https://d2rfa446ja7yzb.cloudfront.net/eyJidWNrZXQiOiJtaXJyb3IuZ2V0Zmxvd2JveC5jb20uZXUtd2VzdC0xLmxpdmUiLCJrZXkiOiJhSFIwY0hNNkx5OTNkM2N1YVc1emRHRm5jbUZ0TG1OdmJTOXdMME0wUjJWS1h6VnZYMko2THc9PS8wIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjo2NDB9fX0=" },
+  //   { src: "https://d2rfa446ja7yzb.cloudfront.net/eyJidWNrZXQiOiJtaXJyb3IuZ2V0Zmxvd2JveC5jb20uZXUtd2VzdC0xLmxpdmUiLCJrZXkiOiJhSFIwY0hNNkx5OTNkM2N1YVc1emRHRm5jbUZ0TG1OdmJTOXdMME16VFRkRlQxZHZZMFYwTHc9PS8wIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjo2NDB9fX0=" },
+  //   { src: "https://image4.com" }
+// ];
 
 }

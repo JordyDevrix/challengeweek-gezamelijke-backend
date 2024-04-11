@@ -3,9 +3,8 @@ package com.example.webshop.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-@Entity
+
 public class Product {
-    @Id
     private String id;
     private String name;
     private String description;
@@ -16,11 +15,10 @@ public class Product {
     private String instruction;
     private String terms;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JsonBackReference
-    private Category category;
 
-    public Product(String name, String description, int stock, double price, String imageUrl, String brand, String instruction, String terms, Category category) {
+    private String category;
+
+    public Product(String name, String description, int stock, double price, String imageUrl, String brand, String instruction, String terms, String category) {
         this.name = name;
         this.description = description;
         this.stock = stock;
@@ -113,11 +111,11 @@ public class Product {
         this.terms = terms;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 }

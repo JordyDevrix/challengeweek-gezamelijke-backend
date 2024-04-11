@@ -74,7 +74,7 @@ public class AuthController {
         userRepository.save(customUser);
 
         String token = jwtUtil.generateToken(customUser.getEmail());
-        LoginResponse loginResponse = new LoginResponse(customUser.getEmail(), token);
+        LoginResponse loginResponse = new LoginResponse(customUser.getEmail(), token, customUser.getRole());
 
         return ResponseEntity.ok(loginResponse);
     }
@@ -90,7 +90,7 @@ public class AuthController {
             String token = jwtUtil.generateToken(body.email);
 
             CustomUser customUser = userRepository.findByEmail(body.email);
-            LoginResponse loginResponse = new LoginResponse(customUser.getEmail(), token);
+            LoginResponse loginResponse = new LoginResponse(customUser.getEmail(), token, customUser.getRole());
 
 
             return ResponseEntity.ok(loginResponse);

@@ -24,8 +24,15 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$')]),
-      password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')])
+      password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]),
+      confirmPassword: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')])
     });
+  }
+
+  public passwordMatchValidator(form: FormGroup) {
+    if (form.get('password')?.value !== form.get('confirmPassword')?.value) {
+      form.get('confirmPassword')?.setErrors({ mismatch: true });
+    }
   }
 
   public navigateToLogin() {
@@ -42,9 +49,19 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       const email = this.registerForm.get('email')?.value;
       const password = this.registerForm.get('password')?.value;
+      const confirmPassword = this.registerForm.get('confirmPassword')?.value;
+      const name = this.registerForm.get('name')?.value;
+      const phone = this.registerForm.get('phone')?.value;
+      const address = this.registerForm.get('address')?.value;
+      const city = this.registerForm.get('city')?.value;
+      const country = this.registerForm.get('country')?.value;
+      const zip = this.registerForm.get('zip')?.value;
 
-      if (email && password) {
-        this.authService.register(email, password).subscribe({
+      console.log(email + "," + password + "," + confirmPassword + "," + name + "," + phone + "," + address + "," + city + "," + country + "," +  zip);
+
+
+      if (password === confirmPassword && email && password && name && phone && address && city && country && zip) {
+        this.authService.register(email, password, name, phone, address, city,country,zip).subscribe({
           next: () => {
             const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
             this.router.navigateByUrl(returnUrl || '/');

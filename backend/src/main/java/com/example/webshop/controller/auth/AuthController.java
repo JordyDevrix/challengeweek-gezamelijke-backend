@@ -53,8 +53,9 @@ public class AuthController {
 
         // no properties should be null in customUser
         if (StringUtils.isEmpty(customUser.getName()) || StringUtils.isEmpty(customUser.getPhone()) ||
-                StringUtils.isEmpty(customUser.getAddress()) || StringUtils.isEmpty(customUser.getZip()) || StringUtils.isEmpty(customUser.getCity()) ||
-                StringUtils.isEmpty(customUser.getEmail()) || StringUtils.isEmpty(customUser.getPassword()) || StringUtils.isEmpty(customUser.getCountry())) {
+                StringUtils.isEmpty(customUser.getAddress()) || StringUtils.isEmpty(customUser.getZip()) ||
+                StringUtils.isEmpty(customUser.getCity()) || StringUtils.isEmpty(customUser.getEmail()) ||
+                StringUtils.isEmpty(customUser.getPassword()) || StringUtils.isEmpty(customUser.getCountry())) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "One or more properties are null or empty"
             );

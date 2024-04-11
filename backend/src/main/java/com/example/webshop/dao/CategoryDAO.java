@@ -114,7 +114,6 @@ public class CategoryDAO {
     public String createCategory(CategoryDTO categoryDTO, long webshopId) {
         WebshopDTO webshop = this.webshopDAO.getWebshopById(webshopId);
         String url = webshop.getUrl() + "/admin/categories/create";
-        System.out.println(url);
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
@@ -181,7 +180,6 @@ public class CategoryDAO {
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .build();
-        System.out.println(url);
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 

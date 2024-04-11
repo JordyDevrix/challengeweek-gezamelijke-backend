@@ -1,15 +1,21 @@
 import { Component } from '@angular/core';
 import stringSimilarity from 'string-similarity';
+import {FaIconComponent, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [],
+  imports: [
+    FaIconComponent
+  ],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'
 })
 export class SearchBarComponent {
-  searchQuery = ""
+  myString = ""
+  faMagnifyingGlass = faMagnifyingGlass;
+  constructor() { }
 
   productList = [
     "AKAI MPK mini mk3", "AKAI MPK mini mk2", "AKAI MPK mini MK1", "AKAI Mini plus", "AKAI mk3 plus", "AKAI MK2 plus", "AKAI LPK25", "Devine Ez creator", "M-Audio Keystation MK3", "Devine Ez creator plus", "M-Audio Keystation mini MK3", "AKAI Professional APC key", "Arturia Keylab MK3"
@@ -22,11 +28,9 @@ export class SearchBarComponent {
 
   newEvent(event: any) {
     console.log(event.target.value)
-    this.searchQuery = event.target.value
     this.myString = event.target.value;
   }
 
-  myString = this.searchQuery;
   stringSimilarity = stringSimilarity
   public search() {
     console.log("Query: " + this.myString)

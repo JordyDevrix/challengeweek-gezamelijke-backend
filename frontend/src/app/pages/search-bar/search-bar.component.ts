@@ -9,7 +9,7 @@ import stringSimilarity from 'string-similarity';
   styleUrl: './search-bar.component.scss'
 })
 export class SearchBarComponent {
-
+  searchQuery = ""
 
   productList = [
     "AKAI MPK mini mk3", "AKAI MPK mini mk2", "AKAI MPK mini MK1", "AKAI Mini plus", "AKAI mk3 plus", "AKAI MK2 plus", "AKAI LPK25", "Devine Ez creator", "M-Audio Keystation MK3", "Devine Ez creator plus", "M-Audio Keystation mini MK3", "AKAI Professional APC key", "Arturia Keylab MK3"
@@ -20,9 +20,16 @@ export class SearchBarComponent {
     "keyboards", "speakers", "cables", "microphones", "headphones", "controllers", "mixers", "interfaces", "stands", "instruments", "software"
   ];
 
-  myString = "keyboard"
+  newEvent(event: any) {
+    console.log(event.target.value)
+    this.searchQuery = event.target.value
+    this.myString = event.target.value;
+  }
+
+  myString = this.searchQuery;
   stringSimilarity = stringSimilarity
   public search() {
+    console.log("Query: " + this.myString)
     let productsFound = [];
     console.log("Results by direct match:");
     for (let i = 0; i < this.productList.length; i++) {

@@ -14,9 +14,9 @@ import { CartService } from '../../services/cart.service';
   imports: [
     ProductIndexComponent,
     ProductHeaderComponent,
-    RouterLink, 
+    RouterLink,
     SearchBarComponent,
-    CarouselComponent1, 
+    CarouselComponent1,
     ProductIndexComponent,
   ],
   templateUrl: './home.component.html',

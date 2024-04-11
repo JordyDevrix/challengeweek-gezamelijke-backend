@@ -23,7 +23,8 @@ export class SearchBarComponent {
   myString = ""
   faMagnifyingGlass = faMagnifyingGlass;
 
-  constructor(private productService: ProductsService, private categoryService: CategoryService) { }
+  constructor(private productService: ProductsService,private categoryService: CategoryService) {
+  }
 
   ngOnInit()   {
     this.productService

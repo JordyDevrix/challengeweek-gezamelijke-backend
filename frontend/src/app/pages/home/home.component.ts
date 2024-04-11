@@ -28,11 +28,11 @@ export class HomeComponent {
     this.success = urlParams.get('success') === 'true';
   }
 
-  public slides = [
-    { src: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*mQb_Psavd1aGLlMXJJ2HvA.png" },
-    { src: "https://d2rfa446ja7yzb.cloudfront.net/eyJidWNrZXQiOiJtaXJyb3IuZ2V0Zmxvd2JveC5jb20uZXUtd2VzdC0xLmxpdmUiLCJrZXkiOiJhSFIwY0hNNkx5OTNkM2N1YVc1emRHRm5jbUZ0TG1OdmJTOXdMME0wUjJWS1h6VnZYMko2THc9PS8wIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjo2NDB9fX0=" },
-    { src: "https://d2rfa446ja7yzb.cloudfront.net/eyJidWNrZXQiOiJtaXJyb3IuZ2V0Zmxvd2JveC5jb20uZXUtd2VzdC0xLmxpdmUiLCJrZXkiOiJhSFIwY0hNNkx5OTNkM2N1YVc1emRHRm5jbUZ0TG1OdmJTOXdMME16VFRkRlQxZHZZMFYwTHc9PS8wIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjo2NDB9fX0=" },
-    { src: "https://image4.com" }
-];
+  // public slides = [
+  //   { src: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*mQb_Psavd1aGLlMXJJ2HvA.png" },
+  //   { src: "https://d2rfa446ja7yzb.cloudfront.net/eyJidWNrZXQiOiJtaXJyb3IuZ2V0Zmxvd2JveC5jb20uZXUtd2VzdC0xLmxpdmUiLCJrZXkiOiJhSFIwY0hNNkx5OTNkM2N1YVc1emRHRm5jbUZ0TG1OdmJTOXdMME0wUjJWS1h6VnZYMko2THc9PS8wIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjo2NDB9fX0=" },
+  //   { src: "https://d2rfa446ja7yzb.cloudfront.net/eyJidWNrZXQiOiJtaXJyb3IuZ2V0Zmxvd2JveC5jb20uZXUtd2VzdC0xLmxpdmUiLCJrZXkiOiJhSFIwY0hNNkx5OTNkM2N1YVc1emRHRm5jbUZ0TG1OdmJTOXdMME16VFRkRlQxZHZZMFYwTHc9PS8wIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjo2NDB9fX0=" },
+  //   { src: "https://image4.com" }
+// ];
 
 }

@@ -2,7 +2,6 @@ package com.example.webshop.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,15 +18,15 @@ public class Order {
     @JsonInclude
     private CustomUser user;
 
-    @ManyToMany
-    @JsonManagedReference
-    private List<Product> products;
+    @OneToMany(mappedBy = "order_id", cascade = CascadeType.ALL)
+    @JsonInclude
+    private List<OrderProduct> products;
 
     private String orderDate;
     private String status;
     private double totalPrice;
 
-    public Order(CustomUser user, List<Product> products, String orderDate, String status, double totalPrice) {
+    public Order(CustomUser user, String orderDate, String status, double totalPrice) {
         this.user = user;
         this.products = products;
         this.orderDate = orderDate;
@@ -51,11 +50,11 @@ public class Order {
         this.user = user;
     }
 
-    public List<Product> getProducts() {
+    public List<OrderProduct> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<OrderProduct> products) {
         this.products = products;
     }
 

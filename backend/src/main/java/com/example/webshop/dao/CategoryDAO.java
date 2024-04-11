@@ -75,6 +75,10 @@ public class CategoryDAO {
     public Category getCategoryById(String id){
         // get prefix from id
         String prefix = id.split("-")[0];
+
+        // uppercase the prefix
+        prefix = prefix.toUpperCase();
+
         // get id from id
         String categoryId = id.split("-")[1];
 

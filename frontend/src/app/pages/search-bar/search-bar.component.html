@@ -1,16 +1,16 @@
 <div class="container">
     <div class="row">
       <div class="col">
-        <form action="/nl/nl/s/" method="get" role="search" aria-label="" id="siteSearch" class="js-search-form">
+<!--        <form action="/nl/nl/s/" method="get" role="search" aria-label="" id="siteSearch" class="js-search-form">-->
           <div class="input-group">
-            <input id="searchfor" name="searchtext" type="text" value="" maxlength="75" autocorrect="off" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Waar ben je naar op zoek?" class="form-control">
+            <input id="searchfor" name="searchtext" type="text" value="" maxlength="75" autocorrect="off" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Waar ben je naar op zoek?" class="form-control" (input)="newEvent($event)">
             <div class="input-group-append">
-              <button type="submit" class="btn btn-primary" aria-label="Zoeken">
+              <button type="submit" class="btn btn-primary" aria-label="Zoeken" (click)="search()">
                 <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
               </button>
             </div>
           </div>
-        </form>
+<!--        </form>-->
       </div>
     </div>
   </div>

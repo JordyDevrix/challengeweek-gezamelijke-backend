@@ -8,12 +8,12 @@ import {catchError, forkJoin, map, Observable, of} from "rxjs";
 })
 export class ProductsService {
 
-  private baseUrl: string = 'http://s1149771.student.inf-hsleiden.nl:29771/api/pub/products/all';
+  private baseUrl: string = 'http://groep17.student.inf-hsleiden.nl:30017/api/pub/products/';
 
   constructor(private http:HttpClient) { }
 
   public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl);
+    return this.http.get<Product[]>(this.baseUrl+"all");
   }
 
   public getProductById(id: string): Observable<Product> {

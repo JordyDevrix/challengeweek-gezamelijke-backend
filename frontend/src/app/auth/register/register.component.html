@@ -1,15 +1,16 @@
-<div class="container bg-dark text-white">
-  <h2>Registreren</h2>
+<br/>
+<div class="container bg-light text-white">
+  <h2 style="color: black;">Registreren</h2>
   <form [formGroup]="registerForm" (ngSubmit)="register()">
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email" style="color: black;">Email</label>
       <input type="email" id="email" formControlName="email" class="form-control" required>
       @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {<div class="alert alert-warning mt-2">
         Voer een geldig e-mailadres in.
       </div>}
     </div>
     <div class="form-group">
-      <label for="password">Wachtwoord</label>
+      <label for="password" style="color: black;">Wachtwoord</label>
       <input type="password" id="password" formControlName="password" class="form-control" required>
       @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {<div class="alert alert-warning mt-2">
         Het wachtwoord moet minimaal 8 karakters lang zijn, ten minste 1 hoofdletter, 1 kleine letter, 1 cijfer en 1 speciaal teken bevatten.

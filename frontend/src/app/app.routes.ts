@@ -8,6 +8,7 @@ import {AuthGuard} from "./auth/logic/auth.guard";
 import {CheckoutComponent} from "./checkout/checkout.component";
 import {AllOrdersComponent} from "./pages/all-orders/all-orders.component";
 import {OrderComponent} from "./pages/order/order.component";
+import { ProfileComponent } from './profile/profile.component';
 
 /**
  * The routes for the application.
@@ -53,6 +54,8 @@ export const routes: Routes = [
    * Route for the single order page. The id of the order is a route parameter. This route is protected by the AuthGuard.
    */
   { path: 'order/:id', component: OrderComponent, canActivate: [AuthGuard]},
+
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
 
   /**
    * Route for unmatched paths. Redirects to the home page.

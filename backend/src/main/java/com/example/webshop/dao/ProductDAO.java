@@ -70,6 +70,10 @@ public class ProductDAO {
     public Product getProductById(String id){
         // get prefix from id
         String prefix = id.split("-")[0];
+
+        // uppercase the prefix
+        prefix = prefix.toUpperCase();
+
         // get id from id
         String productId = id.split("-")[1];
 

@@ -42,6 +42,7 @@ export class NavigationComponent implements OnInit{
 
     logout() {
       this.tokenService.removeToken();
+      
     }
 
     public onMouseEnter(event: MouseEvent) {

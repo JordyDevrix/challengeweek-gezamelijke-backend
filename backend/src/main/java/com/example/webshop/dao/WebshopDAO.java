@@ -35,6 +35,11 @@ public class WebshopDAO {
         return new WebshopDTO(webshop.getName(), webshop.getUrl(), webshop.getPrefix());
     }
 
+    public WebshopDTO getWebshopById(long webshopId) {
+        Webshop webshop = webshopRepository.findById(webshopId).get();
+        return new WebshopDTO(webshop.getName(), webshop.getUrl(), webshop.getPrefix());
+    }
+
     public WebshopDTO updateWebshop(WebshopDTO webshopDTO) {
         Webshop webshop = webshopRepository.findById(webshopDTO.getId()).get();
         webshop.setName(webshopDTO.getName());

@@ -12,11 +12,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@CrossOrigin(origins = {"http://s1149771.student.inf-hsleiden.nl:19771", "http://webshop.rickballer.com", "http://localhost:4200"})
+@CrossOrigin(origins = {"http://s1149771.student.inf-hsleiden.nl:19771", "http://webshop.rickballer.com", "http://localhost:4200", "http://localhost:30017", "http://s1149771.student.inf-hsleiden.nl:30017"})
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -36,32 +37,44 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<LoginResponse> register(@RequestBody AuthenticationDTO authenticationDTO) {
-        if (!validator.isValidEmail(authenticationDTO.email)) {
+    public ResponseEntity<LoginResponse> register(@RequestBody CustomUser customUser) {
+
+        if (!validator.isValidEmail(customUser.getEmail())) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid email provided"
             );
         }
 
-        if (!validator.isValidPassword(authenticationDTO.password)) {
+        if (!validator.isValidPassword(customUser.getPassword())) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid password provided"
             );
         }
 
-        CustomUser customUser = userRepository.findByEmail(authenticationDTO.email);
-
-        if (customUser != null){
+        // no properties should be null in customUser
+        if (StringUtils.isEmpty(customUser.getName()) || StringUtils.isEmpty(customUser.getPhone()) ||
+                StringUtils.isEmpty(customUser.getAddress()) || StringUtils.isEmpty(customUser.getZip()) || StringUtils.isEmpty(customUser.getCity()) ||
+                StringUtils.isEmpty(customUser.getEmail()) || StringUtils.isEmpty(customUser.getPassword()) || StringUtils.isEmpty(customUser.getCountry())) {
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Can not register with this email"
+                    HttpStatus.BAD_REQUEST, "One or more properties are null or empty"
             );
         }
-        String encodedPassword = passwordEncoder.encode(authenticationDTO.password);
 
-        CustomUser registerdCustomUser = new CustomUser(authenticationDTO.email, encodedPassword, "ROLE_USER");
-        userRepository.save(registerdCustomUser);
-        String token = jwtUtil.generateToken(registerdCustomUser.getEmail());
-        LoginResponse loginResponse = new LoginResponse(registerdCustomUser.getEmail(), token);
+        if (userRepository.findByEmail(customUser.getEmail()) != null) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "User already exists"
+            );
+        }
+
+        customUser.setRole("ROLE_USER");
+
+        String encodedPassword = passwordEncoder.encode(customUser.getPassword());
+        customUser.setPassword(encodedPassword);
+        userRepository.save(customUser);
+
+        String token = jwtUtil.generateToken(customUser.getEmail());
+        LoginResponse loginResponse = new LoginResponse(customUser.getEmail(), token);
+
         return ResponseEntity.ok(loginResponse);
     }
 
